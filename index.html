@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
     <title>The Oncoming Wave: Navigating the Race to AGI</title>
+    <meta name="description" content="An analysis of the accelerating race to Artificial General Intelligence (AGI), featuring a speculative timeline, visualization of exponential growth, and a practical guide on how to prepare.">
+    <meta name="keywords" content="AGI, Artificial General Intelligence, AI, Future of AI, AI Preparation, Reid Hoffman, Benjamin Todd, Exponential Growth, Technological Singularity">
+    
+    <!-- External Libraries & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Calm Harmony (Stone, Muted Teal, Amber) -->
-    <!-- Application Structure Plan: The application is structured as a narrative journey. It begins with a hero section to set the context. It then presents a "situation" via an interactive timeline of the race to AGI, followed by a "visualization" of the acceleration to make the concept tangible. Finally, it offers a "solution" with an interactive guide on how to prepare. This flow is designed to first establish the importance and urgency of the topic and then provide clear, actionable guidance, making the information more impactful and user-friendly than a simple linear presentation. -->
-    <!-- Visualization & Content Choices: 
-        1. Report Info: Fictional AGI timeline. Goal: Show progression and acceleration. Viz: Interactive HTML/CSS timeline. Interaction: Click to expand details. Justification: Engages the user in exploring the narrative chronologically. Library: Custom JS/CSS.
-        2. Report Info: Concept of exponential progress. Goal: Visualize acceleration. Viz: Line Chart. Interaction: Hover tooltips. Justification: A chart immediately conveys the non-linear trend implied by the timeline. Library: Chart.js (Canvas).
-        3. Report Info: Advice on preparing for AGI. Goal: Organize actionable advice. Viz: Interactive tabbed cards. Interaction: Click to switch categories. Justification: Breaks down complex advice into digestible themes, preventing information overload. Library: Custom JS/CSS. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Custom Styles -->
     <style>
         body {
             font-family: 'Lexend', sans-serif;
@@ -32,11 +34,12 @@
             background-color: #0d9488; /* teal-600 */
             color: #ffffff;
         }
+        /* Styles for the interactive timeline */
         .timeline-item::before {
             content: '';
             position: absolute;
             top: 1rem;
-            left: -0.4375rem;
+            left: -0.4375rem; /* (0.875rem / 2) - 3px border */
             width: 0.875rem;
             height: 0.875rem;
             border-radius: 9999px;
@@ -44,19 +47,22 @@
             border: 3px solid #0d9488;
         }
         .timeline-content {
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
             max-height: 0;
             opacity: 0;
             overflow: hidden;
+            transform: translateY(-10px);
         }
         .timeline-item.active .timeline-content {
-            max-height: 500px;
+            max-height: 500px; /* Generous height for content */
             opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- Header and Navigation -->
     <header class="bg-stone-100 sticky top-0 z-50 shadow-sm">
         <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -73,210 +79,253 @@
     </header>
 
     <main>
+        <!-- Hero Section -->
         <section id="hero" class="py-20 md:py-32 bg-stone-50">
             <div class="max-w-4xl mx-auto px-4 text-center">
                 <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-stone-800">The Oncoming Wave</h1>
                 <p class="mt-4 text-lg md:text-xl text-stone-600">Navigating the Accelerating Race to Artificial General Intelligence</p>
                 <p class="mt-6 max-w-2xl mx-auto text-stone-500">
-                    The development of AGI is not a distant dream; it's a rapidly approaching reality. This application synthesizes a potential timeline of the final years of the race with practical guidance on how to prepare for a world transformed by superintelligence. Explore the future, then prepare for it.
+                    The development of AGI is not a distant dream; it's a rapidly approaching reality. This site synthesizes expert analysis on the final years of the race with practical guidance on how to prepare for a world transformed by superintelligence. Explore the future, then prepare for it.
                 </p>
             </div>
         </section>
 
+        <!-- Timeline Section -->
         <section id="timeline" class="py-16 sm:py-24">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold tracking-tight text-stone-800 sm:text-4xl">The Race to 2030: A Possible Timeline</h2>
-                    <p class="mt-4 text-lg text-stone-600">Based on a fictional forecast, this timeline illustrates the escalating pace of AI development. Click each year to reveal potential milestones.</p>
+                    <p class="mt-4 text-lg text-stone-600">Based on a speculative forecast, this timeline illustrates the escalating pace of AI development. Click each year to reveal potential milestones.</p>
                 </div>
                 <div id="timeline-container" class="relative border-l-2 border-teal-600/50 ml-4">
+                    <!-- Timeline items will be injected here by JavaScript -->
                 </div>
             </div>
         </section>
         
+        <!-- Acceleration Section -->
         <section id="acceleration" class="py-16 sm:py-24 bg-stone-50">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold tracking-tight text-stone-800 sm:text-4xl">Visualizing the Acceleration</h2>
-                    <p class="mt-4 text-lg text-stone-600">The journey to AGI isn't linear; it's exponential. This chart conceptualizes the rapid increase in AI capabilities over time, reflecting the condensed progress seen in the timeline.</p>
+                    <p class="mt-4 text-lg text-stone-600">The journey to AGI isn't linear; it's exponential. The chart below conceptualizes this growth, driven by powerful, interconnected feedback loops.</p>
                 </div>
-                <div class="chart-container relative w-full max-w-3xl mx-auto h-96 md:h-[500px]">
+                <div class="relative w-full max-w-3xl mx-auto h-96 md:h-[500px]">
                     <canvas id="accelerationChart"></canvas>
+                </div>
+
+                <div class="mt-16">
+                    <h3 class="text-2xl font-bold text-center text-stone-800">The Engines of Exponential Growth</h3>
+                    <p class="mt-2 text-center text-stone-600 max-w-3xl mx-auto">This hyper-exponential curve is fueled by three self-reinforcing cycles, creating a potential "industrial explosion."</p>
+                    <div class="grid md:grid-cols-3 gap-8 mt-8 text-center">
+                        <div class="bg-white p-6 rounded-lg shadow-lg border border-stone-200">
+                            <i class="fas fa-robot text-4xl text-teal-600 mb-4"></i>
+                            <h4 class="text-xl font-semibold text-stone-700">Algorithmic Loop</h4>
+                            <p class="mt-2 text-stone-600">AI models improve and accelerate the development of new, more sophisticated algorithms with minimal human intervention.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg border border-stone-200">
+                            <i class="fas fa-microchip text-4xl text-teal-600 mb-4"></i>
+                            <h4 class="text-xl font-semibold text-stone-700">Chip Loop</h4>
+                            <p class="mt-2 text-stone-600">AI designs the next generation of semiconductors, creating a cycle where better chips enable faster AI, which designs even better chips.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg border border-stone-200">
+                            <i class="fas fa-industry text-4xl text-teal-600 mb-4"></i>
+                            <h4 class="text-xl font-semibold text-stone-700">Industrial Loop</h4>
+                            <p class="mt-2 text-stone-600">AI and robotics advance to build and operate factories, producing the very hardware needed to fuel the other two loops.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
+        <!-- Preparation Section -->
         <section id="prepare" class="py-16 sm:py-24">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold tracking-tight text-stone-800 sm:text-4xl">How an Ordinary Person Can Prepare</h2>
-                    <p class="mt-4 text-lg text-stone-600">The future may be uncertain, but our preparation can be intentional. Here are strategies to build resilience and adapt to a world with AGI.</p>
+                    <p class="mt-4 text-lg text-stone-600 max-w-3xl mx-auto">Synthesizing the work of analysts like Benjamin Todd and Reid Hoffman, this framework offers strategies to build resilience and adapt to a world with AGI.</p>
                 </div>
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="w-full md:w-1/3">
                         <div id="prepare-tabs" class="flex md:flex-col flex-wrap gap-2">
+                            <!-- Tab buttons will be injected here by JavaScript -->
                         </div>
                     </div>
-                    <div id="prepare-content" class="w-full md:w-2/3">
+                    <div class="w-full md:w-2/3">
+                        <div id="prepare-content">
+                            <!-- Tab content will be injected here by JavaScript -->
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
+    <!-- Footer -->
     <footer class="bg-stone-200">
         <div class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8 text-center text-stone-500">
             <p>&copy; 2025 AI Futures Synthesis. Information synthesized for educational and speculative purposes.</p>
         </div>
     </footer>
 
+    <!-- Analytics Script Placeholder -->
+    <!-- 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR_GA_ID"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'YOUR_GA_ID');
+        </script>
+    -->
+
     <script>
+    // This event listener ensures that the script will only run after the entire HTML document has been loaded and parsed.
+    // This is the primary safeguard against "Cannot read properties of undefined" errors.
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- DATA OBJECTS ---
+
         const timelineData = [
-            {
-                year: 'Late 2025',
-                title: 'New Architectures Emerge',
-                content: 'Google launches Gemini 2.0 Ultra, moving beyond the standard Transformer architecture. This marks a shift towards more efficient and powerful models, setting a new competitive baseline.'
-            },
-            {
-                year: 'Mid 2026',
-                title: 'OpenAI Responds',
-                content: 'OpenAI releases "Arrakis," its GPT-5 series model. It shows significant improvement in long-context reasoning and agency, capable of complex, multi-step tasks that previously required human intervention.'
-            },
-            {
-                year: '2027',
-                title: 'The Year of Scientific Breakthroughs',
-                content: 'AI models from multiple labs (Anthropic, Meta, Google) begin to contribute novel hypotheses and discoveries in fields like medicine, material science, and physics, accelerating research cycles dramatically.'
-            },
-            {
-                year: '2028',
-                title: 'Economic Disruption and AI Labor',
-                content: 'AI agents become proficient enough to automate a significant percentage of digital tasks, leading to widespread economic debate and the beginning of noticeable shifts in the job market. The concept of "AI colleagues" becomes common in many industries.'
-            },
-            {
-                year: 'Late 2029',
-                title: 'The Ignition',
-                content: 'A model, likely within a state-backed or highly secretive project, demonstrates recursively self-improving capabilities. It begins to enhance its own architecture and algorithms at a rate surpassing human teams. This is considered the "ignition point" of AGI.'
-            }
+            { year: 'Late 2025', title: 'New Architectures Emerge', content: 'Google launches Gemini 2.0 Ultra, moving beyond the standard Transformer architecture. This marks a shift towards more efficient and powerful models, setting a new competitive baseline.' },
+            { year: 'Mid 2026', title: 'OpenAI Responds', content: 'OpenAI releases "Arrakis," its GPT-5 series model. It shows significant improvement in long-context reasoning and agency, capable of complex, multi-step tasks that previously required human intervention.' },
+            { year: '2027', title: 'The Year of Scientific Breakthroughs', content: 'AI models from multiple labs (Anthropic, Meta, Google) begin to contribute novel hypotheses and discoveries in fields like medicine, material science, and physics, accelerating research cycles dramatically.' },
+            { year: '2028', title: 'Economic Disruption and AI Labor', content: 'AI agents become proficient enough to automate a significant percentage of digital tasks, leading to widespread economic debate and the beginning of noticeable shifts in the job market. The concept of "AI colleagues" becomes common in many industries.' },
+            { year: 'Late 2029', title: 'The Ignition', content: 'A model, likely within a state-backed or highly secretive project, demonstrates recursively self-improving capabilities. It begins to enhance its own architecture and algorithms at a rate surpassing human teams. This is considered the "ignition point" of AGI.' }
         ];
 
         const preparationData = {
-            'Mindset': {
+            'Adaptive Mindset': {
                 icon: '🧠',
-                description: 'Cultivate a flexible and resilient mental framework.',
+                description: 'Cultivate a flexible mental framework by viewing AI through a historical lens, not as an unprecedented threat but as a new standard to be mastered.',
                 points: [
-                    '<strong>Accept Radical Change:</strong> Acknowledge that the future will be fundamentally different. Don\'t cling to the status quo.',
-                    '<strong>Become Antifragile:</strong> Go beyond resilience. Seek out volatility and uncertainty as opportunities to learn and grow stronger.',
-                    '<strong>Think in Probabilities:</strong> Avoid binary thinking. Understand the future as a range of possibilities and prepare for multiple scenarios.',
-                    '<strong>Embrace Lifelong Learning:</strong> The most important skill is the ability to learn new skills quickly and continuously.'
+                    '<strong>View AI as Historical Transformation:</strong> Understand AI as the latest in a series of transformative technologies, like the PC or smartphone, to frame it as a tool to be leveraged.',
+                    '<strong>Adopt Personal Agency:</strong> Focus on what you can control—your skills, mindset, and professional role—rather than passively reacting to change.',
+                    '<strong>Experiment Relentlessly:</strong> Use AI tools for both work and play. Hands-on engagement is the most effective way to understand their capabilities and limitations.',
+                    '<strong>Reframe the Challenge:</strong> Move from a defensive "How do I protect my job?" posture to an offensive "How do I use this to create new value?" mindset.'
                 ]
             },
-            'Career': {
+            'Career & Skills': {
                 icon: '💼',
-                description: 'Future-proof your professional life by focusing on irreplaceable skills.',
+                description: 'Job roles will transform, not just disappear. The key is to adapt your skills to complement AI, not compete with it.',
                 points: [
-                    '<strong>Lean into Human-Centric Skills:</strong> Double down on creativity, critical thinking, leadership, empathy, and complex problem-solving.',
-                    '<strong>Become an AI Collaborator:</strong> Learn to use AI as a tool to augment your abilities. Become the human in the loop who directs and refines AI output.',
-                    '<strong>Develop T-Shaped Expertise:</strong> Gain deep knowledge in one area (the vertical bar of the T) and a broad understanding of many others (the horizontal bar).',
-                    '<strong>Prioritize Adaptability:</strong> Your job title in 10 years may not exist today. Focus on building core competencies that can be applied to new roles.'
+                    '<strong>Assess Your Role\'s Proximity to AI:</strong> Determine if your work is "close to AI" (can be amplified) or "far from AI" (resistant to automation) and strategize accordingly.',
+                    '<strong>Cultivate Uniquely Human Skills:</strong> Double down on creativity, critical thinking, emotional intelligence, and complex problem-solving—areas AI cannot easily replicate.',
+                    '<strong>Practice "Information Hygiene":</strong> Develop rigorous skills to discern credible information from AI-generated misinformation to ensure sound decision-making.',
+                    '<strong>Become an AI Collaborator:</strong> Learn to master the new literacy of "prompt engineering" to effectively direct and refine AI outputs, becoming the essential human-in-the-loop.'
                 ]
             },
-            'Financial': {
+            'Financial Strategy': {
                 icon: '💰',
-                description: 'Build financial resilience for a volatile economic landscape.',
+                description: 'Build a robust financial position that is anti-fragile and prepared for a wide range of economic outcomes.',
                 points: [
-                    '<strong>Prepare for Volatility:</strong> The transition to an AGI economy could create massive market swings. Reduce debt and build a robust emergency fund.',
-                    '<strong>Diversify Assets:</strong> Don\'t concentrate your wealth in a single asset class. Spread investments across different sectors and geographies.',
-                    '<strong>Invest in Yourself:</strong> Your skills and knowledge are your most valuable assets. Spend on education and personal development.',
-                    '<strong>Maintain Liquidity:</strong> Having access to cash will be crucial for seizing opportunities or weathering unexpected downturns.'
+                    '<strong>Hedge Against Uncertainty:</strong> Maintain robust savings and diversified, long-term investments (e.g., low-cost ETFs) as a hedge against both slow and rapid transformation scenarios.',
+                    '<strong>Reduce Debt & Build Emergency Funds:</strong> A volatile transition period is likely. Lowering financial liabilities and having liquid assets provides resilience and flexibility.',
+                    '<strong>Make Small, High-Risk Bets:</strong> Consider tiny, speculative investments in the "AI value chain" (e.g., semiconductor companies) as a hedge against the possibility of a few companies capturing most of the value.',
+                    '<strong>Invest in Yourself:</strong> Your skills, knowledge, and adaptability are your most valuable assets. Prioritize spending on education and personal development.'
                 ]
             },
-            'Community': {
+            'Social & Personal Capital': {
                 icon: '🤝',
-                description: 'Strengthen your local and social networks.',
+                description: 'In a time of rapid change, your network and personal resilience become your most critical assets.',
                 points: [
-                    '<strong>Build Strong Local Networks:</strong> In times of rapid change, a reliable local community is invaluable. Get to know your neighbors.',
-                    '<strong>Focus on Real Relationships:</strong> Deep, meaningful human connections will become more important than ever. Nurture your relationships with family and friends.',
-                    '<strong>Develop Practical Skills:</strong> Skills like gardening, basic repairs, or first aid can be incredibly valuable in a community.',
-                    '<strong>Participate in Local Governance:</strong> A functional, resilient society starts at the local level. Get involved.'
-                ]
-            },
-            'Skills': {
-                icon: '🛠️',
-                description: 'Acquire practical skills for an AI-integrated world.',
-                points: [
-                    '<strong>Master Prompt Engineering:</strong> Learn how to communicate effectively with AI models to get the desired results. This is the new literacy.',
-                    '<strong>Understand Basic Coding & Data Analysis:</strong> You don\'t need to be an expert, but knowing the fundamentals of how technology works is crucial.',
-                    '<strong>Learn to Vet Information:</strong> In a world of AI-generated content, the ability to discern truth from fiction will be a superpower.',
-                    '<strong>Practice Systems Thinking:</strong> Understand how different parts of a complex system (like society) interact and influence each other.'
+                    '<strong>Build a Strong Information Network:</strong> Actively cultivate and maintain connections with knowledgeable people to stay informed and supported as developments unfold.',
+                    '<strong>Strengthen Local Community Ties:</strong> Real-world relationships with neighbors and local groups are invaluable for mutual support during periods of social or economic volatility.',
+                    '<strong>Cultivate General Resilience:</strong> Focus on your physical and mental well-being and develop a broad, practical skill set to weather any storm.',
+                    '<strong>Nurture Deep Relationships:</strong> As digital interactions become more superficial, deep, meaningful connections with family and friends will become an even more important anchor.'
                 ]
             }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const timelineContainer = document.getElementById('timeline-container');
-            timelineData.forEach((item, index) => {
+
+        // --- FUNCTION DEFINITIONS ---
+
+        function initializeTimeline() {
+            const container = document.getElementById('timeline-container');
+            if (!container) return; // Exit if the container element doesn't exist
+
+            container.innerHTML = ''; // Clear existing content
+            timelineData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'timeline-item relative pl-8 pb-8 cursor-pointer';
                 div.innerHTML = `
                     <h3 class="text-lg font-semibold text-teal-700">${item.year} - ${item.title}</h3>
                     <div class="timeline-content">
-                        <p class="mt-2 text-stone-600">${item.content}</p>
+                        <p class="mt-2 text-stone-600 p-4 bg-stone-50 rounded-md">${item.content}</p>
                     </div>
                 `;
                 div.addEventListener('click', () => {
-                    div.classList.toggle('active');
-                    document.querySelectorAll('.timeline-item').forEach(el => {
-                        if (el !== div) el.classList.remove('active');
-                    });
+                    const wasActive = div.classList.contains('active');
+                    // Deactivate all items first
+                    document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
+                    // Activate the clicked item if it wasn't already active
+                    if (!wasActive) {
+                        div.classList.add('active');
+                    }
                 });
-                timelineContainer.appendChild(div);
+                container.appendChild(div);
             });
-            if (timelineContainer.firstChild) {
-                timelineContainer.firstChild.classList.add('active');
+            // Open the first timeline item by default
+            if (container.firstChild) {
+                container.firstChild.classList.add('active');
             }
-            
-            const prepareTabsContainer = document.getElementById('prepare-tabs');
-            const prepareContentContainer = document.getElementById('prepare-content');
+        }
 
-            const tabButtons = Object.keys(preparationData).map((key) => {
+        function initializePreparationTabs() {
+            const tabsContainer = document.getElementById('prepare-tabs');
+            const contentContainer = document.getElementById('prepare-content');
+            if (!tabsContainer || !contentContainer) return;
+
+            tabsContainer.innerHTML = ''; // Clear existing content
+            contentContainer.innerHTML = '';
+
+            Object.keys(preparationData).forEach((key, index) => {
                 const data = preparationData[key];
                 const button = document.createElement('button');
-                button.className = 'w-full text-left p-4 rounded-lg font-medium transition duration-200 ease-in-out hover:bg-teal-500 hover:text-white';
-                button.innerHTML = `<span class="mr-3">${data.icon}</span>${key}`;
+                button.className = 'w-full text-left p-4 rounded-lg font-medium transition duration-200 ease-in-out hover:bg-teal-500 hover:text-white flex items-center';
+                button.innerHTML = `<span class="mr-3 text-xl w-6 text-center">${data.icon}</span><span>${key}</span>`;
                 button.dataset.tab = key;
+
                 button.addEventListener('click', () => {
-                    document.querySelectorAll('#prepare-tabs button').forEach(btn => btn.classList.remove('active-tab'));
+                    tabsContainer.querySelectorAll('button').forEach(btn => btn.classList.remove('active-tab'));
                     button.classList.add('active-tab');
                     renderPrepareContent(key);
                 });
-                prepareTabsContainer.appendChild(button);
-                return button;
+
+                tabsContainer.appendChild(button);
+
+                // Activate the first tab by default
+                if (index === 0) {
+                    button.classList.add('active-tab');
+                    renderPrepareContent(key);
+                }
             });
+        }
 
-            if (tabButtons.length > 0) {
-                tabButtons[0].classList.add('active-tab');
-                renderPrepareContent(tabButtons[0].dataset.tab);
-            }
+        function renderPrepareContent(key) {
+            const contentContainer = document.getElementById('prepare-content');
+            if (!contentContainer) return;
 
-            function renderPrepareContent(key) {
-                const data = preparationData[key];
-                prepareContentContainer.innerHTML = `
-                    <div class="bg-white p-6 rounded-lg shadow-lg border border-stone-200">
-                        <h3 class="text-2xl font-bold text-stone-800 flex items-center">
-                            <span class="text-3xl mr-4">${data.icon}</span>
-                            <span>${key}</span>
-                        </h3>
-                        <p class="mt-2 text-stone-600">${data.description}</p>
-                        <ul class="mt-4 space-y-3 list-disc list-inside text-stone-700">
-                            ${data.points.map(p => `<li>${p}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
-            }
+            const data = preparationData[key];
+            contentContainer.innerHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-lg border border-stone-200 h-full">
+                    <h3 class="text-2xl font-bold text-stone-800 flex items-center">
+                        <span class="text-3xl mr-4">${data.icon}</span>
+                        <span>${key}</span>
+                    </h3>
+                    <p class="mt-2 text-stone-600">${data.description}</p>
+                    <ul class="mt-4 space-y-3 list-disc list-inside text-stone-700">
+                        ${data.points.map(p => `<li>${p}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
 
-            const ctx = document.getElementById('accelerationChart').getContext('2d');
-            const accelerationChart = new Chart(ctx, {
+        function initializeChart() {
+            const ctx = document.getElementById('accelerationChart')?.getContext('2d');
+            if (!ctx) return;
+
+            new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: ['2025', '2026', '2027', '2028', '2029', '2030'],
@@ -295,45 +344,35 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Abstract Capability Units'
-                            }
-                        },
-                        x: {
-                           title: {
-                                display: true,
-                                text: 'Year'
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return ` An exponential leap in AI power and impact.`;
-                                }
-                            }
-                        }
-                    }
+                    scales: { y: { beginAtZero: true, title: { display: true, text: 'Abstract Capability Units' } }, x: { title: { display: true, text: 'Year' } } },
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: () => ` An exponential leap in AI power and impact.` } } }
                 }
             });
-            
+        }
+        
+        function initializeSmoothScroll() {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
                 });
             });
-        });
+        }
+
+
+        // --- INITIALIZATION CALLS ---
+        
+        initializeTimeline();
+        initializePreparationTabs();
+        initializeChart();
+        initializeSmoothScroll();
+
+    });
     </script>
 </body>
 </html>
+
