@@ -58,6 +58,11 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Styles for the interactive checklist */
+        .checklist-item input:checked + label {
+            text-decoration: line-through;
+            color: #a8a29e; /* stone-400 */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -73,6 +78,7 @@
                     <a href="#timeline" class="nav-link text-stone-600 font-medium border-b-2 border-transparent hover:border-amber-500">The Race</a>
                     <a href="#acceleration" class="nav-link text-stone-600 font-medium border-b-2 border-transparent hover:border-amber-500">The Acceleration</a>
                     <a href="#prepare" class="nav-link text-stone-600 font-medium border-b-2 border-transparent hover:border-amber-500">How to Prepare</a>
+                    <a href="#resources" class="nav-link text-stone-600 font-medium border-b-2 border-transparent hover:border-amber-500">Resources</a>
                 </div>
             </div>
         </nav>
@@ -143,7 +149,7 @@
             <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl font-bold tracking-tight text-stone-800 sm:text-4xl">How an Ordinary Person Can Prepare</h2>
-                    <p class="mt-4 text-lg text-stone-600 max-w-3xl mx-auto">Synthesizing the work of analysts like Benjamin Todd and Reid Hoffman, this framework offers strategies to build resilience and adapt to a world with AGI.</p>
+                    <p class="mt-4 text-lg text-stone-600 max-w-3xl mx-auto">Synthesizing the work of analysts like Benjamin Todd and Reid Hoffman, this framework offers strategies to build resilience and adapt to a world with AGI. Check off items to track your progress.</p>
                 </div>
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="w-full md:w-1/3">
@@ -159,6 +165,34 @@
                 </div>
             </div>
         </section>
+
+        <!-- NEW: Resources Section -->
+        <section id="resources" class="py-16 sm:py-24 bg-stone-50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold tracking-tight text-stone-800 sm:text-4xl">Further Reading & Resources</h2>
+                    <p class="mt-4 text-lg text-stone-600">Dive deeper into the analysis and perspectives that informed this guide.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg border border-stone-200">
+                        <h3 class="font-semibold text-stone-800 text-lg">Core Analysis</h3>
+                        <ul class="mt-4 space-y-3">
+                            <li><a href="https://www.youtube.com/watch?v=JA64Ft62SQE" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-amber-600">How to Prepare for AGI (with Benjamin Todd) - YouTube</a></li>
+                            <li><a href="https://every.to/podcast/how-to-prepare-for-agi-according-to-reid-hoffman" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-amber-600">How to Prepare for AGI According to Reid Hoffman - Every</a></li>
+                            <li><a href="https://www.reddit.com/r/slatestarcodex/comments/10r3i6g/how_to_prepare_for_transformative_ai/" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-amber-600">How to prepare for transformative AI? - Reddit</a></li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg border border-stone-200">
+                        <h3 class="font-semibold text-stone-800 text-lg">Referenced Videos</h3>
+                         <ul class="mt-4 space-y-3">
+                            <li><a href="https://youtu.be/5KVDDfAkRgc?feature=shared" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-amber-600">Do AI Dream Of Consciousness? - YouTube</a></li>
+                            <li><a href="https://youtu.be/UclrVWafRAI?si=JHsrMT2JmGUNQDhP" target="_blank" rel="noopener noreferrer" class="text-teal-700 hover:text-amber-600">The A.I. Dilemma - YouTube</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
@@ -180,8 +214,6 @@
     -->
 
     <script>
-    // This event listener ensures that the script will only run after the entire HTML document has been loaded and parsed.
-    // This is the primary safeguard against "Cannot read properties of undefined" errors.
     document.addEventListener('DOMContentLoaded', () => {
 
         // --- DATA OBJECTS ---
@@ -199,40 +231,40 @@
                 icon: '🧠',
                 description: 'Cultivate a flexible mental framework by viewing AI through a historical lens, not as an unprecedented threat but as a new standard to be mastered.',
                 points: [
-                    '<strong>View AI as Historical Transformation:</strong> Understand AI as the latest in a series of transformative technologies, like the PC or smartphone, to frame it as a tool to be leveraged.',
-                    '<strong>Adopt Personal Agency:</strong> Focus on what you can control—your skills, mindset, and professional role—rather than passively reacting to change.',
-                    '<strong>Experiment Relentlessly:</strong> Use AI tools for both work and play. Hands-on engagement is the most effective way to understand their capabilities and limitations.',
-                    '<strong>Reframe the Challenge:</strong> Move from a defensive "How do I protect my job?" posture to an offensive "How do I use this to create new value?" mindset.'
+                    { text: '<strong>View AI as Historical Transformation:</strong> Understand AI as the latest in a series of transformative technologies, like the PC or smartphone, to frame it as a tool to be leveraged.', id: 'mindset1' },
+                    { text: '<strong>Adopt Personal Agency:</strong> Focus on what you can control—your skills, mindset, and professional role—rather than passively reacting to change.', id: 'mindset2' },
+                    { text: '<strong>Experiment Relentlessly:</strong> Use AI tools for both work and play. Hands-on engagement is the most effective way to understand their capabilities and limitations.', id: 'mindset3' },
+                    { text: '<strong>Reframe the Challenge:</strong> Move from a defensive "How do I protect my job?" posture to an offensive "How do I use this to create new value?" mindset.', id: 'mindset4' }
                 ]
             },
             'Career & Skills': {
                 icon: '💼',
                 description: 'Job roles will transform, not just disappear. The key is to adapt your skills to complement AI, not compete with it.',
                 points: [
-                    '<strong>Assess Your Role\'s Proximity to AI:</strong> Determine if your work is "close to AI" (can be amplified) or "far from AI" (resistant to automation) and strategize accordingly.',
-                    '<strong>Cultivate Uniquely Human Skills:</strong> Double down on creativity, critical thinking, emotional intelligence, and complex problem-solving—areas AI cannot easily replicate.',
-                    '<strong>Practice "Information Hygiene":</strong> Develop rigorous skills to discern credible information from AI-generated misinformation to ensure sound decision-making.',
-                    '<strong>Become an AI Collaborator:</strong> Learn to master the new literacy of "prompt engineering" to effectively direct and refine AI outputs, becoming the essential human-in-the-loop.'
+                    { text: '<strong>Assess Your Role\'s Proximity to AI:</strong> Determine if your work is "close to AI" (can be amplified) or "far from AI" (resistant to automation) and strategize accordingly.', id: 'career1' },
+                    { text: '<strong>Cultivate Uniquely Human Skills:</strong> Double down on creativity, critical thinking, emotional intelligence, and complex problem-solving—areas AI cannot easily replicate.', id: 'career2' },
+                    { text: '<strong>Practice "Information Hygiene":</strong> Develop rigorous skills to discern credible information from AI-generated misinformation to ensure sound decision-making.', id: 'career3' },
+                    { text: '<strong>Become an AI Collaborator:</strong> Learn to master the new literacy of "prompt engineering" to effectively direct and refine AI outputs, becoming the essential human-in-the-loop.', id: 'career4' }
                 ]
             },
             'Financial Strategy': {
                 icon: '💰',
                 description: 'Build a robust financial position that is anti-fragile and prepared for a wide range of economic outcomes.',
                 points: [
-                    '<strong>Hedge Against Uncertainty:</strong> Maintain robust savings and diversified, long-term investments (e.g., low-cost ETFs) as a hedge against both slow and rapid transformation scenarios.',
-                    '<strong>Reduce Debt & Build Emergency Funds:</strong> A volatile transition period is likely. Lowering financial liabilities and having liquid assets provides resilience and flexibility.',
-                    '<strong>Make Small, High-Risk Bets:</strong> Consider tiny, speculative investments in the "AI value chain" (e.g., semiconductor companies) as a hedge against the possibility of a few companies capturing most of the value.',
-                    '<strong>Invest in Yourself:</strong> Your skills, knowledge, and adaptability are your most valuable assets. Prioritize spending on education and personal development.'
+                    { text: '<strong>Hedge Against Uncertainty:</strong> Maintain robust savings and diversified, long-term investments (e.g., low-cost ETFs) as a hedge against both slow and rapid transformation scenarios.', id: 'financial1' },
+                    { text: '<strong>Reduce Debt & Build Emergency Funds:</strong> A volatile transition period is likely. Lowering financial liabilities and having liquid assets provides resilience and flexibility.', id: 'financial2' },
+                    { text: '<strong>Make Small, High-Risk Bets:</strong> Consider tiny, speculative investments in the "AI value chain" (e.g., semiconductor companies) as a hedge against the possibility of a few companies capturing most of the value.', id: 'financial3' },
+                    { text: '<strong>Invest in Yourself:</strong> Your skills, knowledge, and adaptability are your most valuable assets. Prioritize spending on education and personal development.', id: 'financial4' }
                 ]
             },
             'Social & Personal Capital': {
                 icon: '🤝',
                 description: 'In a time of rapid change, your network and personal resilience become your most critical assets.',
                 points: [
-                    '<strong>Build a Strong Information Network:</strong> Actively cultivate and maintain connections with knowledgeable people to stay informed and supported as developments unfold.',
-                    '<strong>Strengthen Local Community Ties:</strong> Real-world relationships with neighbors and local groups are invaluable for mutual support during periods of social or economic volatility.',
-                    '<strong>Cultivate General Resilience:</strong> Focus on your physical and mental well-being and develop a broad, practical skill set to weather any storm.',
-                    '<strong>Nurture Deep Relationships:</strong> As digital interactions become more superficial, deep, meaningful connections with family and friends will become an even more important anchor.'
+                    { text: '<strong>Build a Strong Information Network:</strong> Actively cultivate and maintain connections with knowledgeable people to stay informed and supported as developments unfold.', id: 'social1' },
+                    { text: '<strong>Strengthen Local Community Ties:</strong> Real-world relationships with neighbors and local groups are invaluable for mutual support during periods of social or economic volatility.', id: 'social2' },
+                    { text: '<strong>Cultivate General Resilience:</strong> Focus on your physical and mental well-being and develop a broad, practical skill set to weather any storm.', id: 'social3' },
+                    { text: '<strong>Nurture Deep Relationships:</strong> As digital interactions become more superficial, deep, meaningful connections with family and friends will become an even more important anchor.', id: 'social4' }
                 ]
             }
         };
@@ -242,9 +274,9 @@
 
         function initializeTimeline() {
             const container = document.getElementById('timeline-container');
-            if (!container) return; // Exit if the container element doesn't exist
+            if (!container) return; 
 
-            container.innerHTML = ''; // Clear existing content
+            container.innerHTML = ''; 
             timelineData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'timeline-item relative pl-8 pb-8 cursor-pointer';
@@ -256,28 +288,54 @@
                 `;
                 div.addEventListener('click', () => {
                     const wasActive = div.classList.contains('active');
-                    // Deactivate all items first
                     document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
-                    // Activate the clicked item if it wasn't already active
                     if (!wasActive) {
                         div.classList.add('active');
                     }
                 });
                 container.appendChild(div);
             });
-            // Open the first timeline item by default
             if (container.firstChild) {
                 container.firstChild.classList.add('active');
             }
         }
 
+        // --- NEW: Checklist related functions ---
+        let checklistState = {};
+
+        function loadChecklistState() {
+            try {
+                const savedState = localStorage.getItem('agiChecklistState');
+                checklistState = savedState ? JSON.parse(savedState) : {};
+            } catch (e) {
+                console.error("Could not load checklist state from localStorage", e);
+                checklistState = {};
+            }
+        }
+
+        function saveChecklistState() {
+            try {
+                localStorage.setItem('agiChecklistState', JSON.stringify(checklistState));
+            } catch (e) {
+                console.error("Could not save checklist state to localStorage", e);
+            }
+        }
+
+        function handleCheckboxChange(event) {
+            const { id, checked } = event.target;
+            checklistState[id] = checked;
+            saveChecklistState();
+        }
+        
         function initializePreparationTabs() {
             const tabsContainer = document.getElementById('prepare-tabs');
             const contentContainer = document.getElementById('prepare-content');
             if (!tabsContainer || !contentContainer) return;
 
-            tabsContainer.innerHTML = ''; // Clear existing content
+            tabsContainer.innerHTML = '';
             contentContainer.innerHTML = '';
+            
+            loadChecklistState(); // Load saved state
 
             Object.keys(preparationData).forEach((key, index) => {
                 const data = preparationData[key];
@@ -294,7 +352,6 @@
 
                 tabsContainer.appendChild(button);
 
-                // Activate the first tab by default
                 if (index === 0) {
                     button.classList.add('active-tab');
                     renderPrepareContent(key);
@@ -307,6 +364,18 @@
             if (!contentContainer) return;
 
             const data = preparationData[key];
+            
+            // NEW: Updated to render an interactive checklist instead of a static list
+            const checklistItemsHTML = data.points.map(point => {
+                const isChecked = checklistState[point.id] ? 'checked' : '';
+                return `
+                    <div class="checklist-item flex items-start my-3">
+                        <input type="checkbox" id="${point.id}" class="mt-1 h-5 w-5 rounded border-gray-300 text-teal-600 focus:ring-teal-500" ${isChecked}>
+                        <label for="${point.id}" class="ml-3 text-stone-700 transition-colors">${point.text}</label>
+                    </div>
+                `;
+            }).join('');
+
             contentContainer.innerHTML = `
                 <div class="bg-white p-6 rounded-lg shadow-lg border border-stone-200 h-full">
                     <h3 class="text-2xl font-bold text-stone-800 flex items-center">
@@ -314,11 +383,19 @@
                         <span>${key}</span>
                     </h3>
                     <p class="mt-2 text-stone-600">${data.description}</p>
-                    <ul class="mt-4 space-y-3 list-disc list-inside text-stone-700">
-                        ${data.points.map(p => `<li>${p}</li>`).join('')}
-                    </ul>
+                    <div class="mt-4">
+                        ${checklistItemsHTML}
+                    </div>
                 </div>
             `;
+
+            // Add event listeners to the new checkboxes
+            data.points.forEach(point => {
+                const checkbox = document.getElementById(point.id);
+                if(checkbox) {
+                    checkbox.addEventListener('change', handleCheckboxChange);
+                }
+            });
         }
 
         function initializeChart() {
