@@ -166,7 +166,7 @@
             </div>
         </section>
 
-        <!-- NEW: Resources Section -->
+        <!-- Resources Section -->
         <section id="resources" class="py-16 sm:py-24 bg-stone-50">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
@@ -217,16 +217,28 @@
     document.addEventListener('DOMContentLoaded', () => {
 
         // --- DATA OBJECTS ---
-
+        
+        // UPDATED: Timeline data with more detailed content
         const timelineData = [
-            { year: 'Late 2025', title: 'New Architectures Emerge', content: 'Google launches Gemini 2.0 Ultra, moving beyond the standard Transformer architecture. This marks a shift towards more efficient and powerful models, setting a new competitive baseline.' },
-            { year: 'Mid 2026', title: 'OpenAI Responds', content: 'OpenAI releases "Arrakis," its GPT-5 series model. It shows significant improvement in long-context reasoning and agency, capable of complex, multi-step tasks that previously required human intervention.' },
-            { year: '2027', title: 'The Year of Scientific Breakthroughs', content: 'AI models from multiple labs (Anthropic, Meta, Google) begin to contribute novel hypotheses and discoveries in fields like medicine, material science, and physics, accelerating research cycles dramatically.' },
-            { year: '2028', title: 'Economic Disruption and AI Labor', content: 'AI agents become proficient enough to automate a significant percentage of digital tasks, leading to widespread economic debate and the beginning of noticeable shifts in the job market. The concept of "AI colleagues" becomes common in many industries.' },
-            { year: 'Late 2029', title: 'The Ignition', content: 'A model, likely within a state-backed or highly secretive project, demonstrates recursively self-improving capabilities. It begins to enhance its own architecture and algorithms at a rate surpassing human teams. This is considered the "ignition point" of AGI.' }
+            { year: 'Late 2025', title: 'New Architectures Emerge', content: 'Major labs like Google move beyond the standard Transformer architecture. These new models are fundamentally more efficient and powerful, setting a new competitive baseline and accelerating the algorithmic feedback loop.' },
+            { year: 'Mid 2026', title: 'OpenAI Responds', content: 'OpenAI\'s GPT-5 series model, "Arrakis," demonstrates a significant leap in long-context reasoning and agentic behavior. It can reliably execute complex, multi-step tasks that previously required direct human intervention and oversight.' },
+            { year: '2027', title: 'The Year of Scientific Breakthroughs', content: 'Specialized AI models from Anthropic, Meta, and others begin to contribute novel, verifiable hypotheses and discoveries in fields like medicine, material science, and physics, dramatically shortening research and development cycles.' },
+            { year: '2028', title: 'Economic Disruption and AI Labor', content: 'AI agents and robotic systems become proficient and cheap enough to automate a significant percentage of digital and physical tasks, sparking widespread economic debate on job displacement and leading to the common integration of "AI colleagues" in many industries.' },
+            { year: 'Late 2029', title: 'The Ignition', content: 'A model, likely within a state-backed or highly secretive private project, demonstrates recursively self-improving capabilities. It begins to enhance its own architecture and algorithms at a rate that exponentially surpasses human teams. This is considered the "ignition point" of an intelligence explosion.' }
         ];
 
+        // UPDATED: Preparation data with a new "Strategic Frameworks" category
         const preparationData = {
+            'Strategic Frameworks': {
+                icon: '🧭',
+                description: 'Understand the core philosophies for navigating the future. The most robust approach combines defensive resilience with adaptive offense.',
+                points: [
+                    { text: '<strong>Todd\'s Defensive Resilience:</strong> Build a foundational bedrock of personal and financial security (savings, networks, skills) to withstand high volatility and a range of potential negative outcomes.', id: 'framework1' },
+                    { text: '<strong>Hoffman\'s Adaptive Offense:</strong> View AI as a historical transformation, not a cataclysm. Actively experiment and leverage new tools to create value, turning change into an opportunity.', id: 'framework2' },
+                    { text: '<strong>The Synthesis:</strong> True anti-fragility comes from integrating both strategies. Use a resilient foundation to safely experiment and adapt to the new "rules of the game" set by AI.', id: 'framework3' },
+                    { text: '<strong>Assess Your Proximity to AI:</strong> Strategically evaluate if your career is "close to AI" (can be amplified) or "far from AI" (naturally resistant to automation) to guide your skill development.', id: 'framework4' }
+                ]
+            },
             'Adaptive Mindset': {
                 icon: '🧠',
                 description: 'Cultivate a flexible mental framework by viewing AI through a historical lens, not as an unprecedented threat but as a new standard to be mastered.',
@@ -241,10 +253,10 @@
                 icon: '💼',
                 description: 'Job roles will transform, not just disappear. The key is to adapt your skills to complement AI, not compete with it.',
                 points: [
-                    { text: '<strong>Assess Your Role\'s Proximity to AI:</strong> Determine if your work is "close to AI" (can be amplified) or "far from AI" (resistant to automation) and strategize accordingly.', id: 'career1' },
                     { text: '<strong>Cultivate Uniquely Human Skills:</strong> Double down on creativity, critical thinking, emotional intelligence, and complex problem-solving—areas AI cannot easily replicate.', id: 'career2' },
                     { text: '<strong>Practice "Information Hygiene":</strong> Develop rigorous skills to discern credible information from AI-generated misinformation to ensure sound decision-making.', id: 'career3' },
-                    { text: '<strong>Become an AI Collaborator:</strong> Learn to master the new literacy of "prompt engineering" to effectively direct and refine AI outputs, becoming the essential human-in-the-loop.', id: 'career4' }
+                    { text: '<strong>Become an AI Collaborator:</strong> Learn to master the new literacy of "prompt engineering" to effectively direct and refine AI outputs, becoming the essential human-in-the-loop.', id: 'career4' },
+                    { text: '<strong>Learn Systems Thinking:</strong> Understand how different parts of a complex system (like society or an economy) interact and influence each other to better anticipate second- and third-order effects of AI.', id: 'career5' }
                 ]
             },
             'Financial Strategy': {
@@ -299,8 +311,7 @@
                 container.firstChild.classList.add('active');
             }
         }
-
-        // --- NEW: Checklist related functions ---
+        
         let checklistState = {};
 
         function loadChecklistState() {
@@ -335,7 +346,7 @@
             tabsContainer.innerHTML = '';
             contentContainer.innerHTML = '';
             
-            loadChecklistState(); // Load saved state
+            loadChecklistState(); 
 
             Object.keys(preparationData).forEach((key, index) => {
                 const data = preparationData[key];
@@ -365,7 +376,6 @@
 
             const data = preparationData[key];
             
-            // NEW: Updated to render an interactive checklist instead of a static list
             const checklistItemsHTML = data.points.map(point => {
                 const isChecked = checklistState[point.id] ? 'checked' : '';
                 return `
@@ -389,7 +399,6 @@
                 </div>
             `;
 
-            // Add event listeners to the new checkboxes
             data.points.forEach(point => {
                 const checkbox = document.getElementById(point.id);
                 if(checkbox) {
